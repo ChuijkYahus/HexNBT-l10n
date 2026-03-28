@@ -1,0 +1,45 @@
+{
+	"schemaVersion": 1,
+	"id": "hexnbt",
+	"version": "${version}",
+	"name": "HexNBT",
+	"description": "Accessing NBT data with Hex Casting!",
+	"authors": [
+		"TallestTheTall"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/hexnbt/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			{
+				"value": "net.lizzy.hexnbt.HexNBT",
+				"adapter": "kotlin"
+			}
+		],
+		"client": [
+			{
+				"value": "net.lizzy.hexnbt.HexNBTClient",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"mixins": [
+		"hexnbt.mixins.json",
+		{
+			"config": "hexnbt.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*",
+		"fabric-language-kotlin": "*"
+	}
+}

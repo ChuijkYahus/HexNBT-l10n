@@ -1,0 +1,7 @@
+{
+  "hexnbt.entry.patterns.nbt": "NBT",
+
+  "hexnbt.page.nbt.readnbt": "Reads the \"NBT\" value of the given key for the given entity.",
+
+  "hexcasting.action.hexnbt:readnbt": "Read NBT"
+}

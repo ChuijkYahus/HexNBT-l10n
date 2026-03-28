@@ -1,0 +1,16 @@
+{
+  "name": "hexnbt.entry.patterns.nbt",
+  "icon": "minecraft:name_tag",
+  "category": "hexcasting:patterns",
+  "advancement": "hexcasting:root",
+  "pages": [
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexnbt:readnbt",
+      "anchor": "hexnbt:readnbt",
+      "input": "entity, string",
+      "output": "string",
+      "text": "hexnbt.page.nbt.readnbt"
+    }
+  ]
+}
