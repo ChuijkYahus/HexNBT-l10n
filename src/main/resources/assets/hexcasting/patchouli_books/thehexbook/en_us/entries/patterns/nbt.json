@@ -8,9 +8,17 @@
       "type": "hexcasting:pattern",
       "op_id": "hexnbt:readnbt",
       "anchor": "hexnbt:readnbt",
-      "input": "entity, string",
+      "input": "entity | vec, string",
       "output": "string",
       "text": "hexnbt.page.nbt.readnbt"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexnbt:listkeys",
+      "anchor": "hexnbt:listkeys",
+      "input": "entity | vec",
+      "output": "[string]",
+      "text": "hexnbt.page.nbt.listkeys"
     }
   ]
 }

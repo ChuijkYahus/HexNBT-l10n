@@ -4,34 +4,37 @@ import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getEntity
 import at.petrak.hexcasting.api.casting.iota.Iota
-import ram.talia.moreiotas.api.asActionResult as stringActionResult
+import ram.talia.moreiotas.api.casting.iota.StringIota
 import at.petrak.hexcasting.api.casting.asActionResult
 import at.petrak.hexcasting.api.casting.getVec3
 import at.petrak.hexcasting.api.casting.iota.EntityIota
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
-import ram.talia.moreiotas.api.getString
 
-class readnbt : ConstMediaAction {
-    override val argc = 2
+class listkeys : ConstMediaAction {
+    override val argc = 1
     override fun execute(args: List<Iota>, env: CastingEnvironment) : List<Iota>{
         if (args.elementAt(0).type == EntityIota.TYPE) {
             val target = args.getEntity(0)
-            val key = args.getString(1)
             var nbt = CompoundTag()
             target.saveWithoutId(nbt)
-            val value = nbt.get(key) ?: return null.asActionResult
+            var keys = nbt.allKeys.toList()
+            var sKeys = mutableListOf<StringIota>()
 
-            return value.toString().stringActionResult
+            keys.forEachIndexed { i, key -> sKeys.add(StringIota.make(key.toString())) }
+
+            return sKeys.asActionResult
         }
         else {
             val pos = args.getVec3(0)
-            val key = args.getString(1)
             val target = env.world.getBlockEntity(BlockPos.containing(pos)) ?: return null.asActionResult
             var nbt = target.saveWithoutMetadata()
-            val value = nbt.get(key) ?: return null.asActionResult
+            var keys = nbt.allKeys.toList()
+            var sKeys = mutableListOf<StringIota>()
 
-            return value.toString().stringActionResult
+            keys.forEachIndexed { i, key -> sKeys.add(StringIota.make(key.toString())) }
+
+            return sKeys.asActionResult
         }
     }
 }
