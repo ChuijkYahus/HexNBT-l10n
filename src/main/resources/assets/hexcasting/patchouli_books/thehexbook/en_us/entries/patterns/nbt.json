@@ -2,7 +2,9 @@
   "name": "hexnbt.entry.patterns.nbt",
   "icon": "minecraft:name_tag",
   "category": "hexcasting:patterns",
-  "advancement": "hexcasting:root",
+  "advancement": "hexcasting:enlightenment",
+  "entry_color": "54398a",
+  "sortnum": 64,
   "pages": [
     {
       "type": "hexcasting:pattern",

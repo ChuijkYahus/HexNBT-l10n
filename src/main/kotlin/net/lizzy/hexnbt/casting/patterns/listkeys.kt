@@ -8,14 +8,20 @@ import ram.talia.moreiotas.api.casting.iota.StringIota
 import at.petrak.hexcasting.api.casting.asActionResult
 import at.petrak.hexcasting.api.casting.getVec3
 import at.petrak.hexcasting.api.casting.iota.EntityIota
+import at.petrak.hexcasting.api.casting.mishaps.MishapBadCaster
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 
 class listkeys : ConstMediaAction {
     override val argc = 1
     override fun execute(args: List<Iota>, env: CastingEnvironment) : List<Iota>{
+        if (!env.isEnlightened) { throw MishapBadCaster() }
+
         if (args.elementAt(0).type == EntityIota.TYPE) {
             val target = args.getEntity(0)
+
+            env.assertEntityInRange(target)
+
             var nbt = CompoundTag()
             target.saveWithoutId(nbt)
             var keys = nbt.allKeys.toList()
@@ -27,6 +33,9 @@ class listkeys : ConstMediaAction {
         }
         else {
             val pos = args.getVec3(0)
+
+            env.assertVecInRange(pos)
+
             val target = env.world.getBlockEntity(BlockPos.containing(pos)) ?: return null.asActionResult
             var nbt = target.saveWithoutMetadata()
             var keys = nbt.allKeys.toList()
